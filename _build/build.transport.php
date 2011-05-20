@@ -2,7 +2,7 @@
 /**
  * UserUrls
  *
- * Copyright 2011 by Oleg Pryadko (websitezen.com) 
+ * Copyright 2011 by Oleg Pryadko (websitezen.com)
  *
  * This file is part of UserUrls, a user friendly-url package for MODx Revolution
  * UserUrls is free software; you can redistribute it and/or modify it under the
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License along wit
  * UserUrls; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA 02111-1307 USA
- 
+
  * @package UserUrls
  */
 /**
@@ -36,7 +36,7 @@ set_time_limit(0);
 /* Set package info be sure to set all of these */
 define('PKG_NAME','UserUrls');
 define('PKG_NAME_LOWER','userurls');
-define('PKG_VERSION','1.0.4');
+define('PKG_VERSION','0.1.1');
 define('PKG_RELEASE','beta');
 define('PKG_CATEGORY','UserUrls');
 
@@ -44,24 +44,24 @@ define('PKG_CATEGORY','UserUrls');
  * as you create the transport package
  * */
 $hasMenu = false; /* Add items to the MODx Top Menu */
-$hasSettings = false; /* Add new MODx System Settings */
+$hasSettings = true; /* Add new MODx System Settings */
 $hasAccessPolicies = false;
 $hasPolicyTemplates = false;
 $hasAssets = false; /* Transfer the files in the assets dir. */
-$hasCore = false;   /* Transfer the files in the core dir. */
-$hasSnippets = false;
+$hasCore = true;   /* Transfer the files in the core dir. */
+$hasSnippets = true;
 $hasChunks = false;
 $hasSubPackages = false; /* add in other component packages (transport.zip files) - copy only, no auto-install */
 $hasTemplates = false;
 $hasPropertySets = false;
-$hasResources = true;
-$hasSystemSettings = true; /* Set some default custom settings. */
+$hasResources = false;
+$hasSystemSettings = false; /* Forces addition of some settings. */
 $hasSetupOptions = false; /* Update system settings from PHP/ HTML form. */
 $hasValidator = false; /* Run a validator before installing anything */
 $hasMainResolver = false; /* Run a specific, general install resolver after installation */
 $hasResolvers = false; /* Add additional custom resolvers */
 $hasTemplateVariables = false;
-$hasPlugins = false;
+$hasPlugins = true;
 /* $hasPluginEvents = false; */
 
 /* define sources */
@@ -90,12 +90,12 @@ unset($root);
 /* set package attributes options */
 $packageAttributeArray = array(
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
-    'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
+    'readme' => file_get_contents($sources['root'] . 'README.txt'),
     'changelog' => file_get_contents($sources['docs'] . 'changelog.txt'),
 );
 if ($hasSetupOptions) {
-	$packageAttributeArray['setup-options'] = array();
-	$packageAttributeArray['setup-options']['source'] = $sources['install_options'].'user.input.php';
+    $packageAttributeArray['setup-options'] = array();
+    $packageAttributeArray['setup-options']['source'] = $sources['install_options'].'user.input.php';
 }
 
 /* override with your own defines here */
@@ -130,23 +130,23 @@ if ($hasResources) {
         $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in resources.');
     } else {
         $attributes= array(
-			xPDOTransport::PRESERVE_KEYS => false,
-			xPDOTransport::UPDATE_OBJECT => true,
-			xPDOTransport::UNIQUE_KEY => 'pagetitle',
-			xPDOTransport::RELATED_OBJECTS => true,
-			xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-				'ContentType' => array(
-					xPDOTransport::PRESERVE_KEYS => false,
-					xPDOTransport::UPDATE_OBJECT => true,
-					xPDOTransport::UNIQUE_KEY => 'name',
-				),
-			),
-		);
-		foreach ($resources as $resource) {
-			$vehicle = $builder->createVehicle($resource,$attributes);
-			$builder->putVehicle($vehicle);
-		}
-		$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($resources).' resources.');
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => 'pagetitle',
+            xPDOTransport::RELATED_OBJECTS => true,
+            xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+                'ContentType' => array(
+                    xPDOTransport::PRESERVE_KEYS => false,
+                    xPDOTransport::UPDATE_OBJECT => true,
+                    xPDOTransport::UNIQUE_KEY => 'name',
+                ),
+            ),
+        );
+        foreach ($resources as $resource) {
+            $vehicle = $builder->createVehicle($resource,$attributes);
+            $builder->putVehicle($vehicle);
+        }
+        $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($resources).' resources.');
     }
     unset($resources,$resource,$attributes);
 }
@@ -171,7 +171,7 @@ if ($hasMenu) {
                 xPDOTransport::UNIQUE_KEY => array ('namespace','controller'),
             ),
         ),
-		));
+        ));
         $builder->putVehicle($vehicle);
 
         $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($menu).' menu items.');
@@ -181,113 +181,113 @@ if ($hasMenu) {
 
 /* load system settings */
 if ($hasSettings) {
-	$settings = include_once $sources['data'].'transport.settings.php';
+    $settings = include_once $sources['data'].'transport.settings.php';
     if (!is_array($settings)) {
         $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
     } else {
-		$attributes= array(
-			xPDOTransport::UNIQUE_KEY => 'key',
-			xPDOTransport::PRESERVE_KEYS => true,
-			xPDOTransport::UPDATE_OBJECT => false,
-		);
-		if (!is_array($settings)) { $modx->log(modX::LOG_LEVEL_FATAL,'Adding settings failed.'); }
-		foreach ($settings as $setting) {
-			$vehicle = $builder->createVehicle($setting,$attributes);
-			$builder->putVehicle($vehicle);
-		}
-		$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' system settings.'); flush();
-		unset($settings,$setting,$attributes);
+        $attributes= array(
+            xPDOTransport::UNIQUE_KEY => 'key',
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => false,
+        );
+        if (!is_array($settings)) { $modx->log(modX::LOG_LEVEL_FATAL,'Adding settings failed.'); }
+        foreach ($settings as $setting) {
+            $vehicle = $builder->createVehicle($setting,$attributes);
+            $builder->putVehicle($vehicle);
+        }
+        $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' system settings.'); flush();
+        unset($settings,$setting,$attributes);
     }
 }
 
 /* package in default access policy template */
 if ($hasPolicyTemplates) {
-	$templates = include $sources['data'].'transport.policytemplates.php';
-	$attributes = array (
-		xPDOTransport::PRESERVE_KEYS => false,
-		xPDOTransport::UNIQUE_KEY => array('name'),
-		xPDOTransport::UPDATE_OBJECT => true,
-		xPDOTransport::RELATED_OBJECTS => true,
-		xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-			'Permissions' => array (
-				xPDOTransport::PRESERVE_KEYS => false,
-				xPDOTransport::UPDATE_OBJECT => true,
-				xPDOTransport::UNIQUE_KEY => array ('template','name'),
-			),
-		)
-	);
-	if (is_array($templates)) {
-		foreach ($templates as $template) {
-			$vehicle = $builder->createVehicle($template,$attributes);
-			$builder->putVehicle($vehicle);
-		}
-		$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($templates).' Access Policy Templates.'); flush();
-	} else {
-		$modx->log(modX::LOG_LEVEL_ERROR,'Could not package in Access Policy Templates.');
-	}
-	unset ($templates,$template,$idx,$ct,$attributes);
+    $templates = include $sources['data'].'transport.policytemplates.php';
+    $attributes = array (
+        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::UNIQUE_KEY => array('name'),
+        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::RELATED_OBJECTS => true,
+        xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+            'Permissions' => array (
+                xPDOTransport::PRESERVE_KEYS => false,
+                xPDOTransport::UPDATE_OBJECT => true,
+                xPDOTransport::UNIQUE_KEY => array ('template','name'),
+            ),
+        )
+    );
+    if (is_array($templates)) {
+        foreach ($templates as $template) {
+            $vehicle = $builder->createVehicle($template,$attributes);
+            $builder->putVehicle($vehicle);
+        }
+        $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($templates).' Access Policy Templates.'); flush();
+    } else {
+        $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in Access Policy Templates.');
+    }
+    unset ($templates,$template,$idx,$ct,$attributes);
 }
 
 /* package in default access policy */
 if ($hasAccessPolicies) {
-	$attributes = array (
-		xPDOTransport::PRESERVE_KEYS => false,
-		xPDOTransport::UNIQUE_KEY => array('name'),
-		xPDOTransport::UPDATE_OBJECT => true,
-	);
-	$policies = include $sources['data'].'transport.policies.php';
-	if (!is_array($policies)) { 
-		$modx->log(modX::LOG_LEVEL_FATAL,'Adding policies failed.'); 
-	} else {
-		foreach ($policies as $policy) {
-			$vehicle = $builder->createVehicle($policy,$attributes);
-			$builder->putVehicle($vehicle);
-		}
-		$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($policies).' Access Policies.'); flush();
-		unset($policies,$policy,$attributes);
-	}
+    $attributes = array (
+        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::UNIQUE_KEY => array('name'),
+        xPDOTransport::UPDATE_OBJECT => true,
+    );
+    $policies = include $sources['data'].'transport.policies.php';
+    if (!is_array($policies)) {
+        $modx->log(modX::LOG_LEVEL_FATAL,'Adding policies failed.');
+    } else {
+        foreach ($policies as $policy) {
+            $vehicle = $builder->createVehicle($policy,$attributes);
+            $builder->putVehicle($vehicle);
+        }
+        $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($policies).' Access Policies.'); flush();
+        unset($policies,$policy,$attributes);
+    }
 }
 
 /* add plugins - DONE */
 if ($hasPlugins) {
-	$plugins = include $sources['data'].'transport.plugins.php';
-	if (!is_array($plugins)) { $modx->log(modX::LOG_LEVEL_FATAL,'Adding plugins failed.'); }
-	$attributes= array(
-		xPDOTransport::UNIQUE_KEY => 'name',
-		xPDOTransport::PRESERVE_KEYS => false,
-		xPDOTransport::UPDATE_OBJECT => true,
-		xPDOTransport::RELATED_OBJECTS => true,
-		xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-			'PluginEvents' => array(
-				xPDOTransport::PRESERVE_KEYS => true,
-				xPDOTransport::UPDATE_OBJECT => false,
-				xPDOTransport::UNIQUE_KEY => array('pluginid','event'),
-			),
-		),
-	);
-	foreach ($plugins as $plugin) {
-		$vehicle = $builder->createVehicle($plugin, $attributes);
-		$builder->putVehicle($vehicle);
-	}
-	$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($plugins).' plugins.'); flush();
-	unset($plugins,$plugin,$attributes);
+    $plugins = include $sources['data'].'transport.plugins.php';
+    if (!is_array($plugins)) { $modx->log(modX::LOG_LEVEL_FATAL,'Adding plugins failed.'); }
+    $attributes= array(
+        xPDOTransport::UNIQUE_KEY => 'name',
+        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::RELATED_OBJECTS => true,
+        xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+            'PluginEvents' => array(
+                xPDOTransport::PRESERVE_KEYS => true,
+                xPDOTransport::UPDATE_OBJECT => false,
+                xPDOTransport::UNIQUE_KEY => array('pluginid','event'),
+            ),
+        ),
+    );
+    foreach ($plugins as $plugin) {
+        $vehicle = $builder->createVehicle($plugin, $attributes);
+        $builder->putVehicle($vehicle);
+    }
+    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($plugins).' plugins.'); flush();
+    unset($plugins,$plugin,$attributes);
 }
 
 /* add snippets */
 if ($hasSnippets) {
     $modx->log(modX::LOG_LEVEL_INFO,'Adding in snippets.');
-	$snippets = include $sources['data'].'transport.snippets.php';
-	if (is_array($snippets)) {
-		$category->addMany($snippets,'Snippets');
-	} else { $modx->log(modX::LOG_LEVEL_FATAL,'Adding snippets failed.'); }
-	$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($snippets).' snippets.'); flush();
-	unset($snippets);
+    $snippets = include $sources['data'].'transport.snippets.php';
+    if (is_array($snippets)) {
+        $category->addMany($snippets,'Snippets');
+    } else { $modx->log(modX::LOG_LEVEL_FATAL,'Adding snippets failed.'); }
+    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($snippets).' snippets.'); flush();
+    unset($snippets);
 }
 
 /* add chunks */
 if ($hasChunks) { /* add chunks  */
     $modx->log(modX::LOG_LEVEL_INFO,'Adding in chunks.');
-    /* note: Chunks' default properties are set in transport.chunks.php */    
+    /* note: Chunks' default properties are set in transport.chunks.php */
     $chunks = include $sources['data'].'transport.chunks.php';
     if (is_array($chunks)) {
         $category->addMany($chunks, 'Chunks');
@@ -295,7 +295,7 @@ if ($hasChunks) { /* add chunks  */
 }
 
 /* add templates  */
-if ($hasTemplates) { 
+if ($hasTemplates) {
     $modx->log(modX::LOG_LEVEL_INFO,'Adding in templates.');
     /* note: Templates' default properties are set in transport.templates.php */
     $templates = include $sources['data'].'transport.templates.php';
@@ -307,7 +307,7 @@ if ($hasTemplates) {
 }
 
 /* add templatevariables  */
-if ($hasTemplateVariables) { 
+if ($hasTemplateVariables) {
     $modx->log(modX::LOG_LEVEL_INFO,'Adding in Template Variables.');
     /* note: Template Variables' default properties are set in transport.tvs.php */
     $templatevariables = include $sources['data'].'transport.tvs.php';
@@ -317,7 +317,7 @@ if ($hasTemplateVariables) {
 }
 
 /* add property sets */
-if ($hasPropertySets) { 
+if ($hasPropertySets) {
     $modx->log(modX::LOG_LEVEL_INFO,'Adding in property sets.');
     $propertysets = include $sources['data'].'transport.propertysets.php';
     /* note: property set' properties are set in transport.propertysets.php */
@@ -388,19 +388,19 @@ $vehicle = $builder->createVehicle($category,$attr);
 /* copy core folder */
 if ($hasCore) {
     $modx->log(modX::LOG_LEVEL_INFO, 'Adding in core.');
-	$vehicle->resolve('file',array(
-		'source' => $sources['source_core'],
-		'target' => "return MODX_CORE_PATH . 'components/';",
-	));
+    $vehicle->resolve('file',array(
+        'source' => $sources['source_core'],
+        'target' => "return MODX_CORE_PATH . 'components/';",
+    ));
 }
 
 /* copy assets folder */
 if ($hasAssets) {
     $modx->log(modX::LOG_LEVEL_INFO, 'Adding in assets.');
-	$vehicle->resolve('file',array(
-		'source' => $sources['source_assets'],
-		'target' => "return MODX_ASSETS_PATH . 'components/';",
-	));
+    $vehicle->resolve('file',array(
+        'source' => $sources['source_assets'],
+        'target' => "return MODX_ASSETS_PATH . 'components/';",
+    ));
 }
 
 /* Add subpackages */
@@ -419,9 +419,9 @@ if ($hasSubPackages) {
 
 /* setupOptions Resolver */
 if ($hasSetupOptions) {
-	$vehicle->resolve('php',array(
-		'source' => $sources['resolvers'] . 'setupoptions.resolver.php',
-	));
+    $vehicle->resolve('php',array(
+        'source' => $sources['resolvers'] . 'setupoptions.resolver.php',
+    ));
 }
 
 
@@ -446,23 +446,23 @@ if ($hasMainResolver) {
 
 if ($hasSystemSettings) {
     $modx->log(modX::LOG_LEVEL_INFO, 'Adding in some default settings.');
-	$vehicle->resolve('php',array(
-		'source' => $sources['resolvers'] . 'system_settings.resolver.php',
-	));
+    $vehicle->resolve('php',array(
+        'source' => $sources['resolvers'] . 'system_settings.resolver.php',
+    ));
 }
 
 /* resolvers */
 if ($hasResolvers) {
-	// add as many other resolvers as necessary
+    // add as many other resolvers as necessary
     $modx->log(modX::LOG_LEVEL_INFO, 'Adding in all other resolvers.');
-	$vehicle->resolve('php',array(
-		'source' => $sources['resolvers'] . 'tables.resolver.php',
-	));
+    $vehicle->resolve('php',array(
+        'source' => $sources['resolvers'] . 'tables.resolver.php',
+    ));
 }
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in resolvers.'); flush();
 
 /* Put the category vehicle (with all the stuff we added to the
- * category) into the package 
+ * category) into the package
  */
 $builder->putVehicle($vehicle);
 

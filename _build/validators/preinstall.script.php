@@ -3,7 +3,7 @@
  * Mycomponent pre-install script
  *
  * Copyright 2011 Oleg Pryadko <oleg@websitezen.com>
- * 
+ *
  * May 2011
  *
  * Mycomponent is free software; you can redistribute it and/or modify it

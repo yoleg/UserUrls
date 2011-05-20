@@ -31,11 +31,39 @@ $idx=1;
 $snippets[$idx]= $modx->newObject('modSnippet');
 $snippets[$idx]->fromArray(array(
     'id' => $idx,
-    'name' => 'test',
-    'description' => 'test',
-    'snippet' => getSnippetContent($sources['snippets'].'test.snippet.php'),
+    'name' => 'UserUrls',
+    'description' => 'Helper snippet for userurls. Place on the page that gets redirected to.',
+    'snippet' => getSnippetContent($sources['snippets'].'userurls.snippet.php'),
 ));
 
+$idx++;
+$snippets[$idx]= $modx->newObject('modSnippet');
+$snippets[$idx]->fromArray(array(
+    'id' => $idx,
+    'name' => 'uuId',
+    'description' => 'Gets the userid from a UserUrls target page.',
+    'snippet' => getSnippetContent($sources['snippets'].'uuid.snippet.php'),
+));
+
+$idx++;
+$snippets[$idx]= $modx->newObject('modSnippet');
+$snippets[$idx]->fromArray(array(
+    'id' => $idx,
+    'name' => 'uuAction',
+    'description' => 'Gets the UserUrls action (as defined in uu.action_map) from a UserUrls target page.',
+    'snippet' => getSnippetContent($sources['snippets'].'uuaction.snippet.php'),
+));
+
+$idx++;
+$snippets[$idx]= $modx->newObject('modSnippet');
+$snippets[$idx]->fromArray(array(
+    'id' => $idx,
+    'name' => 'uuu',
+    'description' => 'Generates a URL to a UserUrls target page based on a userid and action. Defaults to the current UserUrl page if called on one.',
+    'snippet' => getSnippetContent($sources['snippets'].'uuu.snippet.php'),
+));
+
+/* Template snippet
 $idx++;
 $snippets[$idx]= $modx->newObject('modSnippet');
 $snippets[$idx]->fromArray(array(
@@ -44,9 +72,9 @@ $snippets[$idx]->fromArray(array(
     'description' => 'test2',
     'snippet' => getSnippetContent($sources['snippets'].'test2.snippet.php'),
 ));
+*/
 
-
-/* Example snippet with properties: 
+/* Example snippet with properties:
 $idx++;
 $snippets[$idx]= $modx->newObject('modSnippet');
 $snippets[$idx]->fromArray(array(

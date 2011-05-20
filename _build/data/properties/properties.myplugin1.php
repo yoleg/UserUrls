@@ -2,7 +2,7 @@
 
 /**
  * Default properties for the UserUrls snippet
- * 
+ *
  * May 2011
  *
  * @package userurls

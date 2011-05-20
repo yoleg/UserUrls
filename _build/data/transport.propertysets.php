@@ -2,7 +2,7 @@
 /**
  * UserUrls transport property sets
  * Copyright 2011 Oleg Pryadko <oleg@websitezen.com>
- * 
+ *
  * May 2011
  *
  * UserUrls is free software; you can redistribute it and/or modify it

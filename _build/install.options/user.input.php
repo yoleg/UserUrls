@@ -2,8 +2,8 @@
 /*
  * UserUrls
  *
- * Copyright 2011 by Oleg Pryadko (websitezen.com) 
- 
+ * Copyright 2011 by Oleg Pryadko (websitezen.com)
+
  * This file is part of UserUrls, a user friendly-url package for MODx Revolution
  *
  * UserUrls is free software; you can redistribute it and/or modify it under the
@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU General Public License along with
  * UserUrls; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA 02111-1307 USA
- 
+
  * @package UserUrls
  */
 /**
@@ -73,7 +73,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         if ($setting != null) { $values['conversation_subfolder'] = $setting->get('value'); }
         unset($setting);
 
-		break;
+        break;
     case xPDOTransport::ACTION_UNINSTALL: break;
 }
 

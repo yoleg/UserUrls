@@ -27,11 +27,76 @@
 */
 $settings = array();
 
-$settings['userurls.test1']= $modx->newObject('modSystemSetting');
-$settings['userurls.test1']->fromArray(array(
-    'key' => 'userurls.test1',
-    'value' => '{assets_path}templates/custom/',
+$settings['uu.start']= $modx->newObject('modSystemSetting');
+$settings['uu.start']->fromArray(array(
+    'key' => 'uu.start',
+    'value' => '1',
     'xtype' => 'textfield',
+    'namespace' => 'userurls'
+),'',true,true);
+
+$settings['uu.prefix']= $modx->newObject('modSystemSetting');
+$settings['uu.prefix']->fromArray(array(
+    'key' => 'uu.prefix',
+    'value' => 'uu_',
+    'xtype' => 'textfield',
+    'namespace' => 'userurls'
+),'',true,true);
+
+$settings['uu.param_id']= $modx->newObject('modSystemSetting');
+$settings['uu.param_id']->fromArray(array(
+    'key' => 'uu.param_id',
+    'value' => 'userid',
+    'xtype' => 'textfield',
+    'namespace' => 'userurls'
+),'',true,true);
+
+$settings['uu.param_action']= $modx->newObject('modSystemSetting');
+$settings['uu.param_action']->fromArray(array(
+    'key' => 'uu.param_action',
+    'value' => 'action',
+    'xtype' => 'textfield',
+    'namespace' => 'userurls'
+),'',true,true);
+
+$settings['uu.action_map']= $modx->newObject('modSystemSetting');
+$settings['uu.action_map']->fromArray(array(
+    'key' => 'uu.action_map',
+    'value' => 'action',
+    'xtype' => 'textfield',
+    'namespace' => 'userurls'
+),'',true,true);
+
+$settings['uu.search_field']= $modx->newObject('modSystemSetting');
+$settings['uu.search_field']->fromArray(array(
+    'key' => 'uu.search_field',
+    'value' => 'username',
+    'xtype' => 'textfield',
+    'namespace' => 'userurls'
+),'',true,true);
+
+$settings['uu.result_field']= $modx->newObject('modSystemSetting');
+$settings['uu.result_field']->fromArray(array(
+    'key' => 'uu.result_field',
+    'value' => 'id',
+    'xtype' => 'textfield',
+    'namespace' => 'userurls'
+),'',true,true);
+
+$settings['uu.search_class']= $modx->newObject('modSystemSetting');
+$settings['uu.search_class']->fromArray(array(
+    'key' => 'uu.search_class',
+    'value' => 'modUser',
+    'xtype' => 'textfield',
+    'namespace' => 'userurls'
+),'',true,true);
+
+
+$settings['uu.enabled']= $modx->newObject('modSystemSetting');
+$settings['uu.enabled']->fromArray(array(
+    'key' => 'uu.enabled',
+    'value' => true,
+    'xtype' => 'combo-boolean',
     'namespace' => 'userurls'
 ),'',true,true);
 

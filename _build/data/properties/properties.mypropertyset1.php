@@ -2,7 +2,7 @@
 
 /**
  * properties for UserUrls properteyset2
- * 
+ *
  * May 2011
  *
  * @package userurls

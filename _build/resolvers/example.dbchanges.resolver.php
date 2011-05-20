@@ -27,7 +27,7 @@
  * @package UserUrls
  * @subpackage build
  */
- 
+
 /* Needs to be adjusted for userurls */
 
 if ($object->xpdo) {
@@ -55,7 +55,7 @@ if ($object->xpdo) {
             $modx->exec("ALTER TABLE {$modx->getTableName('SimpleMessage')} ADD `existing_params` TEXT");
             $modx->exec("ALTER TABLE {$modx->getTableName('SimpleMessage')} ADD INDEX `resource` (`resource`)");
 */
- 
+
             /* add albumed changes */
 /*
             $modx->exec("ALTER TABLE {$modx->getTableName('SimpleMessage')} ADD `ip` VARCHAR(255) NOT NULL default '0.0.0.0' AFTER `website`");
@@ -71,13 +71,13 @@ if ($object->xpdo) {
             $modx->exec("ALTER TABLE {$modx->getTableName('SimpleMessage')} ADD INDEX `deleted` (`deleted`)");
             $modx->exec("ALTER TABLE {$modx->getTableName('SimpleMessage')} ADD INDEX `deletedby` (`deletedby`)");
 */
- 
+
             /* add call_params to simpleAlbum */
 /*
             $modx->exec("ALTER TABLE {$modx->getTableName('simpleAlbum')} ADD `userurls_call_params` TEXT AFTER `existing_params`");
             $modx->exec("ALTER TABLE {$modx->getTableName('simpleAlbum')} ADD `userurlsreply_call_params` TEXT AFTER `userurls_call_params`");
 */
- 
+
             /* create album objects for messages if they dont exist */
 /*
             $c = $modx->newQuery('SimpleMessage');

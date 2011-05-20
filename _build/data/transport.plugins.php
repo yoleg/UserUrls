@@ -1,28 +1,31 @@
 ﻿<?php
 /**
  * Package in plugins
- * 
+ *
  * @package UserUrls
  * @subpackage build
  */
 $plugins = array();
 
-/* create the plugin object */
-$plugins[0] = $modx->newObject('modPlugin');
-$plugins[0]->set('id',1);
-$plugins[0]->set('name','cleanmessages');
-$plugins[0]->set('description','Cleans messages when the limit set in userurls.clean_when is reached.');
-$plugins[0]->set('plugincode', getSnippetContent($sources['plugins'] . 'plugin.cleanmessages.php'));
-$plugins[0]->set('category', 0);
-$plugins[0]->set('disabled', 1);
+$idx = 0;
 
-$events = include $sources['events'].'events.cleanmessages.php';
+/* create the main plugin */
+$plugins[$idx] = $modx->newObject('modPlugin');
+$plugins[$idx]->set('id',$idx+1);
+$plugins[$idx]->set('name','UserUrls');
+$plugins[$idx]->set('description','User friendly URLs. Looks up a user id and action based on the URL and passes them to the appropriate page.');
+$plugins[$idx]->set('plugincode', getSnippetContent($sources['plugins'] . 'userurls.plugin.php'));
+$plugins[$idx]->set('category', 0);
+$plugins[$idx]->set('disabled', 0);
+
+$events = include $sources['events'].'events.userurls.php';
 if (is_array($events) && !empty($events)) {
-    $plugins[0]->addMany($events);
-    $modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' Plugin Events for cleanmessages.'); flush();
+    $plugins[$idx]->addMany($events);
+    $modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' Plugin Events for userurls.'); flush();
 } else {
-    $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find plugin events for cleanmessages!');
+    $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find plugin events for userurls.!');
 }
-unset($events);
+
+unset($events,$idx);
 
 return $plugins;

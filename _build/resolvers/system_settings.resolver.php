@@ -32,16 +32,16 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
     case xPDOTransport::ACTION_UPGRADE:
         $new_settings = array(
-            'testsetting' => 'test@yoleg.com',
+            'uu.new_setting' => 'new_value',
         );
         foreach ($new_settings as $key => $value) {
-			$setting = $object->xpdo->getObject('modSystemSetting',array('key' => $key));
-			if ($setting != null) {
-				$setting->set('value',$value);
-				$setting->save();
-			} else {
-				$object->xpdo->log(xPDO::LOG_LEVEL_ERROR,'[userurls] '.$key.' setting could not be found, so the setting could not be changed.');
-			}
+            $setting = $object->xpdo->getObject('modSystemSetting',array('key' => $key));
+            if ($setting != null) {
+                $setting->set('value',$value);
+                $setting->save();
+            } else {
+                $object->xpdo->log(xPDO::LOG_LEVEL_ERROR,'[userurls] '.$key.' setting could not be found, so the setting could not be changed.');
+            }
         }
         $success= true;
         break;
