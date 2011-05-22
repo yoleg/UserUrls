@@ -60,7 +60,7 @@ $snippets[$idx]->fromArray(array(
     'id' => $idx,
     'name' => 'uuUrl',
     'description' => 'Generates a URL to a UserUrls target page based on a userid and action. Defaults to the current UserUrl page if called on one.',
-    'snippet' => getSnippetContent($sources['snippets'].'uuu.snippet.php'),
+    'snippet' => getSnippetContent($sources['snippets'].'uuurl.snippet.php'),
 ));
 
 /* Template snippet

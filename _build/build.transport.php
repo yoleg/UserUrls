@@ -37,7 +37,7 @@ set_time_limit(0);
 define('PKG_NAME','UserUrls');
 define('PKG_NAME_LOWER','userurls');
 define('PKG_VERSION','0.1.2');
-define('PKG_RELEASE','beta');
+define('PKG_RELEASE','beta2');
 define('PKG_CATEGORY','UserUrls');
 
 /* Set package options - you can turn these on one-by-one
