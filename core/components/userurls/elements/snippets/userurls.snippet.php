@@ -3,8 +3,9 @@
  *
  * UserUrls
  *
- * UserUrls helper snippet - place on each UserUrls page.
+ * UserUrls helper snippet
  *
+ * @ package UserUrls
  * @ author Oleg Pryadko <oleg@websitezen.com>
  * @ copyright 2011 Oleg Pryadko
  * @ version 1.0.0 - May 19, 2010
@@ -12,9 +13,8 @@
  *
 **/
 
-$output = '';
 if (!$modx->getOption('uu.enabled')) return '';
-
+$output = '';
 // ToDo: if(!$modx->user->has_permissions('view_user_profiles')) sendErrorPage();
 // ToDo: if($needs_session_context) {if(!$modx->user->has_session_context($this_context)) sendUnauthorizedPage();}
 

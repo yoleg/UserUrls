@@ -1,7 +1,9 @@
 ﻿Changelog for UserUrls.
 
+
 UserUrls 0.1.2 beta
 ======================================
+- beta2-3 fixed minor transport package glitches
 - Changed readme path
 - Changed uuu snippet name to uuUrl
 
