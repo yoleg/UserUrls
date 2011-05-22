@@ -1,9 +1,9 @@
 <?php
 /**
  *
- * uuId
+ * uuUrl
  *
- * Gets the user id of a page using the UserUrls
+ * Generates a UserUrl
  *
  * @ author Oleg Pryadko <oleg@websitezen.com>
  * @ copyright 2011 Oleg Pryadko
@@ -15,8 +15,8 @@
  * action - (Opt) The action to make the URL for - found in uu.action_map system setting.
  * default - (Opt) The value returned if no URL can be made
  *
- * Example: [[!uuu? &user=`20` &action=`messages`]]
- * As output filter for user id: [[!+userid:uuu]] or [[!+userid:uuu=`action`]]
+ * Example: [[!uuUrl? &user=`20` &action=`messages`]]
+ * As output filter for user id: [[!+userid:uuUrl]] or [[!+userid:uuUrl=`action`]]
  *
 **/
 

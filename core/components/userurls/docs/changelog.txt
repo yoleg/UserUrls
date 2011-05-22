@@ -1,6 +1,11 @@
 ﻿Changelog for UserUrls.
 
-UserUrls 0.1
+UserUrls 0.1.2 beta
+======================================
+- Changed readme path
+- Changed uuu snippet name to uuUrl
+
+UserUrls 0.1.0 - 0.1.1 beta
 ======================================
 - Starting Version
 

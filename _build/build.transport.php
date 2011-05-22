@@ -36,7 +36,7 @@ set_time_limit(0);
 /* Set package info be sure to set all of these */
 define('PKG_NAME','UserUrls');
 define('PKG_NAME_LOWER','userurls');
-define('PKG_VERSION','0.1.1');
+define('PKG_VERSION','0.1.2');
 define('PKG_RELEASE','beta');
 define('PKG_CATEGORY','UserUrls');
 
@@ -90,7 +90,7 @@ unset($root);
 /* set package attributes options */
 $packageAttributeArray = array(
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
-    'readme' => file_get_contents($sources['root'] . 'README.txt'),
+    'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
     'changelog' => file_get_contents($sources['docs'] . 'changelog.txt'),
 );
 if ($hasSetupOptions) {

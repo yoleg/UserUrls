@@ -62,7 +62,7 @@ $settings['uu.param_action']->fromArray(array(
 $settings['uu.action_map']= $modx->newObject('modSystemSetting');
 $settings['uu.action_map']->fromArray(array(
     'key' => 'uu.action_map',
-    'value' => 'action',
+    'value' => '',
     'xtype' => 'textfield',
     'namespace' => 'userurls'
 ),'',true,true);
