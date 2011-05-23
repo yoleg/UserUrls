@@ -33,7 +33,7 @@ $uu_start = $modx->getOption('uu.start',null,$modx->getOption('site_start'));
 if (empty($uu_start)) return;
 
 /* Very important options - include on all snippets and plugins! */
-$prefix = $modx->getOption('prefix',$scriptProperties,$modx->getOption('uu.prefix',null,'uu_'));
+$prefix = $modx->getOption('prefix',$scriptProperties,$modx->getOption('uu.prefix',null,''));
 $param_id = $modx->getOption('param_id',$scriptProperties,$modx->getOption('uu.param_id',null,'userid'));
 $param_action = $modx->getOption('param_action',$scriptProperties,$modx->getOption('uu.param_action',null,'action'));
 

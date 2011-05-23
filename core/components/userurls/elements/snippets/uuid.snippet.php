@@ -20,7 +20,7 @@
 **/
 
 /* Very important options - include on all snippets and plugins! */
-$prefix = $modx->getOption('prefix',$scriptProperties,$modx->getOption('uu.prefix',null,'uu_'));
+$prefix = $modx->getOption('prefix',$scriptProperties,$modx->getOption('uu.prefix',null,''));
 $param_id = $modx->getOption('paramId',$scriptProperties,$modx->getOption('uu.param_id',null,'userid'));
 
 $name_id = $prefix.$param_id;

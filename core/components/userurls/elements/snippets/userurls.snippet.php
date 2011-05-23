@@ -19,7 +19,7 @@ $output = '';
 // ToDo: if($needs_session_context) {if(!$modx->user->has_session_context($this_context)) sendUnauthorizedPage();}
 
 /* Very important options - include on all snippets and plugins! */
-$prefix = $modx->getOption('prefix',$scriptProperties,$modx->getOption('uu.prefix',null,'uu_'));
+$prefix = $modx->getOption('prefix',$scriptProperties,$modx->getOption('uu.prefix',null,''));
 $param_id = $modx->getOption('param_id',$scriptProperties,$modx->getOption('uu.param_id',null,'userid'));
 $param_action = $modx->getOption('param_action',$scriptProperties,$modx->getOption('uu.param_action',null,'action'));
 // Unlikely to need changing.
