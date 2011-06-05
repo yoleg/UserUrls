@@ -1,6 +1,10 @@
 ﻿Changelog for UserUrls.
 
 
+UserUrls 0.1.3 beta
+======================================
+- fixed problem with build script, which was failing to package in core folder
+
 UserUrls 0.1.2 beta
 ======================================
 - beta2-3 fixed minor transport package glitches

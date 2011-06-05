@@ -36,8 +36,8 @@ set_time_limit(0);
 /* Set package info be sure to set all of these */
 define('PKG_NAME','UserUrls');
 define('PKG_NAME_LOWER','userurls');
-define('PKG_VERSION','0.1.2');
-define('PKG_RELEASE','beta3');
+define('PKG_VERSION','0.1.3');
+define('PKG_RELEASE','beta');
 define('PKG_CATEGORY','UserUrls');
 
 /* Set package options - you can turn these on one-by-one
@@ -330,7 +330,8 @@ if ($hasPropertySets) {
  * based on which elements are present
  */
 
-$attr = array(xPDOTransport::UNIQUE_KEY => 'category',
+$attr = array(
+    xPDOTransport::UNIQUE_KEY => 'category',
     xPDOTransport::PRESERVE_KEYS => false,
     xPDOTransport::UPDATE_OBJECT => true,
     xPDOTransport::RELATED_OBJECTS => true,
@@ -424,12 +425,7 @@ if ($hasSetupOptions) {
     ));
 }
 
-
-/* create a vehicle for the category and all the things
- * we've added to it.
- */
-$vehicle = $builder->createVehicle($category,$attr);
-
+/* Validator */
 if ($hasValidator) {
     $modx->log(modX::LOG_LEVEL_INFO,'Adding in Script Validator.');
     $vehicle->validate('php',array(
