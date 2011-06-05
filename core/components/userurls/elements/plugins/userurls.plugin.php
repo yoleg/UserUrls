@@ -1,5 +1,4 @@
-<?php
-/**
+<?php/**
  * UserUrls
  *
  * Copyright 2010 by Oleg Pryadko (websitezen.com)
